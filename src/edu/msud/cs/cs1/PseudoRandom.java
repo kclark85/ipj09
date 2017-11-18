@@ -1,3 +1,5 @@
+package edu.msud.cs.cs1;
+
 public class PseudoRandom {
     private long seed;
 
