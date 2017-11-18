@@ -13,6 +13,7 @@ public class Vector {
         double[] result = new double[coords.length];
         for (int i = 0; i < coords.length; i++)
             result[i] = this.coords[i] + that.coords[i];
+        if (this.coords.length != that.coords.length) throw new ArithmeticException();
         return new Vector(result);
     }
 
@@ -27,6 +28,7 @@ public class Vector {
         double sum = 0.0;
         for (int i = 0; i < coords.length; i++)
             sum += this.coords[i] * that.coords[i];
+        if (this.coords.length != that.coords.length) throw new ArithmeticException();
         return sum;
     }
 
@@ -44,6 +46,7 @@ public class Vector {
 
     //performs subtraction using previously constructed methods (a brand new minus method would be been more efficient)
     public Vector minus(Vector that) {
+        if (this.coords.length != that.coords.length) throw new ArithmeticException();
         return this.plus(that.scale(-1.0));
     }
 
@@ -58,39 +61,36 @@ public class Vector {
                 if (this.coords[i] == that.coords[i]) {
                     trueCounter++;
                 }
-                    if(trueCounter == this.coords.length){
-                        equal = true;
-                    }
-
-                else {equal = false;}
+                if (trueCounter == this.coords.length) {
+                    equal = true;
+                } else {
+                    equal = false;
+                }
             }
         }
         return equal;
     }
 
     //overrides default .hashCode() method for objects
-    public int hashCode(Vector that){
+    public int hashCode(Vector that) {
         int thisHC = 0;
-        if(this.equals(that)) thisHC = Math.abs(this.hashCode() + that.hashCode());
+        if (this.equals(that)) thisHC = Math.abs(this.hashCode() + that.hashCode());
         return thisHC;
     }
 
-    public String toString()
-    {
-        String v ="" + this.coords[0];
-        for(int i = 1; i < this.coords.length; i++)
-        {
+    public String toString() {
+        String v = "" + this.coords[0];
+        for (int i = 1; i < this.coords.length; i++) {
             v += "," + this.coords[i];
         }
         return "(" + v + ")";
     }
 
-    public static void main (String[] args)
-    {
-        double[] arr1 = {1.0,2.0,3.0};
-        double[] arr2 = {1.0,2.0,3.0};
-        double[] arr3 = {2.0,2.0,2.0};
-        double[] arr4 = {1.0,2.0};
+    public static void main(String[] args) {
+        double[] arr1 = {1.0, 2.0, 3.0};
+        double[] arr2 = {1.0, 2.0, 3.0};
+        double[] arr3 = {2.0, 2.0, 2.0};
+        double[] arr4 = {1.0, 2.0};
 
         Vector alpha = new Vector(arr1);
         Vector bravo = new Vector(arr2);
